@@ -1,5 +1,8 @@
 # private-note
-A private message encrypter that works like https://privnote.com.
+A private message encrypter that works like https://privnote.com but you own the source and the data in your own AWS account.
+
+Features
+* Deployed to your account with CloudFormation script
 
 ## Design
 On submission:
@@ -36,5 +39,9 @@ Notes:
 TODO
 * allow user to specify TTL (Time to Live) for individual messages
 
-
-
+### Resources
+* One S3 bucket with object read and write access from the lambda
+* One S3 bucket with static html/js resources
+* Dynamic SQS queue creation with queue creation, read and write access from the lambda
+* Api Gateway with `store` and `get` methods that integrate with lambda
+* Api Gateway method that integrates with S3 static resources bucket
