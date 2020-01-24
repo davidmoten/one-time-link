@@ -6,30 +6,30 @@ Features
 
 ## Design
 On submission:
-* a secretId is generated (16 chars using private-note.js:random_string())
-* value is encrypted using secretId AES 256 with library sjcl.js
-* secretId is hashed (SHA-1) using private-note.js:sha1()
-* secretIdHash and encryptedValue submitted to web api (HTTP POST)
+* a /*secretId* is generated (16 chars using private-note.js:random_string())
+* value is encrypted using *secretId* AES 256 with library sjcl.js
+* *secretId* is hashed (SHA-1) using private-note.js:sha1()
+* *secretIdHash* and *encryptedValue* submitted to web api (HTTP POST)
 * web api calls lambda that 
-    * stores encryptedValue in values S3 bucket with key = secretIdHash 
+    * stores *encryptedValue* in values S3 bucket with key = *secretIdHash* 
     * creates FIFO SQS queue with name=secretIdHash. If sqs queue exists throw exception.
     * calculates expiryTimeEpochMs from expiryMs (duration) using currentTime + expiryMs
     * places string expiryTimeEpochMs on queue 
-* display view link using secretId in url
+* display view link using *secretId* in url
 
 On view:
-* secretId is extracted from url parameters
-* secretId is hashed (SHA-1)
-* secretIdHash is submitted to web api (HTTP GET)
+* *secretId* is extracted from url parameters
+* *secretId* is hashed (SHA-1)
+* *secretIdHash* is submitted to web api (HTTP GET)
 * web api calls lambda that
-    * connects to SQS queue with name=secretIdHash
+    * connects to SQS queue with name=*secretIdHash*
     * reads first message (expiryTimeEpochMs) from SQS queue
     * deletes SQS queue
-    * if (expiryTimeEpochMs > now) read encryptedValue from S3 bucket with key = secretIdHash
+    * if (expiryTimeEpochMs > now) read *encryptedValue* from S3 bucket with key = secretIdHash
     * else throw MessageExpiredException 
     * delete S3 object with key = secretIdHash
     * return encryptedValue
-* decrypt encryptedValue in browser client using sjcl.js:decrypt() 
+* decrypt *encryptedValue* in browser client using sjcl.js:decrypt() 
 * display decrypted value 
 
 Notes:
