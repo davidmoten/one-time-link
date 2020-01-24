@@ -22,8 +22,10 @@ On view:
     * connects to SQS queue with name=secretIdHash
     * reads first message (expiryTimeEpochMs) from SQS queue
     * deletes SQS queue
-    * if (expiryTimeEpochMs > now) return encryptedValue from S3 bucket with key = secretIdHash
-    * else throw message expired exception 
+    * if (expiryTimeEpochMs > now) read encryptedValue from S3 bucket with key = secretIdHash
+    * else throw MessageExpiredException 
+    * delete S3 object with key = secretIdHash
+    * return encryptedValue
 * decrypt encryptedValue in browser client using sjcl.js:decrypt() 
 * display decrypted value 
 
