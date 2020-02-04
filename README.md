@@ -54,6 +54,6 @@ Of course this application is ALL about security!
 Important things to note:
 
 * AES 256 is considered strong enough for top secret encryption by the NSA
-* The server never sees the unencrypted value nor the secret key used for the encryption
+* The server side never sees the unencrypted value nor the secret key used for the encryption
 * The FIFO SQS queue is exactly once delivery so only one user can see the unencrypted value before it is deleted from the queue
-* Sending a one-time use link by email is problematic because a man-in-the-middle attack might intercept an email, use the link, and pass on a new link to the recipient. Ideally your communication channel will be secure enough that man-in-the-middle attacks are not possible.
+* Sending a one-time use link by email is problematic because a man-in-the-middle attack might intercept an email, use the link, and create a new link from the secret to pass on to the recipient in the edited email. Ideally your communication channel will be secure enough that man-in-the-middle attacks are not possible.
