@@ -2,7 +2,7 @@ function random_string(C) {
     if (C === null) {
         C = 16
     }
-    var B = "abcdefghijklmnopqrstuvwxyz";
+    var B = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var D = "";
     for (var A = 0; A < C; A++) {
         pos = Math.floor(Math.random() * B.length);
@@ -13,7 +13,7 @@ function random_string(C) {
 
 function encrypt(key, value) {
 	var result = sjcl.encrypt(key, value);
-	console.println(result);
+	console.log(result);
 }
 
 function sha1(str) {

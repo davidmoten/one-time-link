@@ -10,10 +10,10 @@
         <version>0.1</version>
     </parent>
     <artifactId>private-note</artifactId>
+    <packaging>war</packaging>
     <version>0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <description>Utilities for transforming distance along N-dimensional Hilbert Curve to a point and back</description>
-    <packaging>jar</packaging>
+    <description>Webapp for sending single use links to encrypted information</description>
 
     <url>http://github.com/davidmoten/private-note</url>
 

@@ -5,10 +5,12 @@
 </head>
 <body>
 <h3>Private Note</h3>
-<form action="" onsubmit="encrypt('passwd', 'hello'); return true;">
-<textarea style="width:90%;height:90%" id="value"></textarea><br/>
+<form action="#" method="get"
+   onsubmit="var hidden = document.getElementById(&quot;encryptedValue&quot;);hidden.value = encrypt('passwd', 'hello'); return true;">
+<textarea style="width:90%;height:50%" id="value"></textarea><br/>
 <input type="hidden" name="encryptedValue"></input><br/>
 <input style="margin-top:1em" type="submit" value="Encrypt"></input><br/>
 </form>
 </body>
+<p onclick="console.log(random_string(16));console.log(encrypt('passwd', 'hello'));">hello</p>
 </html>
