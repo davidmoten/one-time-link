@@ -28,7 +28,7 @@
 		}
 		
 		var result = document.getElementById('result');
-		result.value = "Sending...";
+		result.innerHTML = "Sending...";
 		
 		fetch(frm.action, {
 		  method: frm.method,
@@ -36,30 +36,63 @@
 		}).then(function(res) {
 		  if (res.ok) {
 		    console.log(res);
-		    result.value = window.location.origin + "/decrypt.html?id=" + id.value;
+                    var u = window.location.origin + "/?id=" + id.value;
+		    result.innerHTML = "<a href=" + u + ">" + u + "</a>";
 		  } else {
 		    console.log("error", res);
-		    result.value = "Error, try again";
+		    result.innerHTML = "Error, try again";
 		  }
 		});
-		
-		console.log("Down here");
-		
 		return false;
     }
 	
+	function getUrlVars() {
+	    var vars = {};
+	    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+	        vars[key] = value;
+	    });
+	    return vars;
+	}
+	
+	function getUrlParam(parameter, defaultvalue){
+	    var urlparameter = defaultvalue;
+	    if(window.location.href.indexOf(parameter) > -1){
+	        urlparameter = getUrlVars()[parameter];
+	        }
+	    return urlparameter;
+	}
+	
+	function initialize() {
+		var id = getUrlParam('id', '');
+		if (id.length > 0) {
+			document.getElementById('encrypt').style.display='none';
+			document.getElementById('decrypt').style.display='block';
+		} else {
+			document.getElementById('encrypt').style.display='block';
+			document.getElementById('decrypt').style.display='none';
+		}
+	    console.log("init run");
+	}
+	
+	window.onload = initialize;
 </script>
 </head>
 <body>
 	<h3>Private Note</h3>
-	<form id="formEncrypt" onsubmit="return f(this)" method="POST"
-		action="create">
-		<textarea style="width: 90%; height: 75%" id="value"></textarea>
-		<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br />
-		<input type="hidden" id="id" name="id"></input><br /> 
-		<input
-			type="submit" value="Encrypt"></input>
-	</form>
-	<p id="result"></p>
+	<div id="encrypt">
+		<form id="formEncrypt" onsubmit="return f(this)" method="POST"
+			action="create">
+			<textarea style="width: 90%; height: 75%" id="value"></textarea>
+			<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br />
+			<input type="hidden" id="id" name="id"></input><br /> 
+			<input
+				type="submit" value="Encrypt"></input>
+		</form>
+		<p id="result"></p>
+	</div>
+	
+	<div id="decrypt">
+	    <p>Decrypt stuff here</p>
+	</div>
 </body>
 </html>
