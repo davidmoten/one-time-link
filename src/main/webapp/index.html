@@ -19,51 +19,47 @@
 		// encrypt the value using the password
 		hidden.value = encrypt(password, value);
 
-		  const data = {};
-
-		  for (let input of frm) {
-		    if (input.name && input.value) {
-		      data[input.name] = input.value
-		    }
+		const data = {};
+		
+		for (let input of frm) {
+		  if (input.name && input.value) {
+		    data[input.name] = input.value
 		  }
-
-		  frm.result.value = "Sending...";
-
-		  fetch(frm.action, {
-		    method: frm.method,
-		    body: JSON.stringify(data)
-		  }).then(function(res) {
-		    if (res.ok) {
-		      console.log(res);
-		      frm.result.value = window.location.origin + "/decrypt.html?id=" + id.value;
-		    } else {
-		      console.log("error", res);
-		      frm.result.value = "Error, try again";
-		    }
-		  });
-
-		  console.log("Down here");
-
-		  return false;
+		}
+		
+		var result = document.getElementById('result');
+		result.value = "Sending...";
+		
+		fetch(frm.action, {
+		  method: frm.method,
+		  body: JSON.stringify(data)
+		}).then(function(res) {
+		  if (res.ok) {
+		    console.log(res);
+		    result.value = window.location.origin + "/decrypt.html?id=" + id.value;
+		  } else {
+		    console.log("error", res);
+		    result.value = "Error, try again";
+		  }
+		});
+		
+		console.log("Down here");
+		
+		return false;
     }
-
-	
-	function bind() {
-	    document.getElementById('formEncrypt').addEventListener("submit", submit);
-	}
-	
-	//window.onLoad = bind;
 	
 </script>
 </head>
 <body>
 	<h3>Private Note</h3>
-	<form id="formEncrypt" onsubmit="return f(this)" method="POST" action="create">
-	    <textarea style="width: 90%; height: 75%" id="value"></textarea>
+	<form id="formEncrypt" onsubmit="return f(this)" method="POST"
+		action="create">
+		<textarea style="width: 90%; height: 75%" id="value"></textarea>
 		<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br />
 		<input type="hidden" id="id" name="id"></input><br /> 
-	    <input style = "width:90%" type="text" id="result"></input><br/>
-	    <input type="submit" value="Encrypt"></input>
+		<input
+			type="submit" value="Encrypt"></input>
 	</form>
+	<p id="result"></p>
 </body>
 </html>
