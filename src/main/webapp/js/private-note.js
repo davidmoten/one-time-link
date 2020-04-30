@@ -12,8 +12,7 @@ function random_string(C) {
 }
 
 function encrypt(key, value) {
-	var result = sjcl.encrypt(key, value);
-	console.log(result);
+	return JSON.stringify(sjcl.encrypt(key, value));
 }
 
 function sha1(str) {

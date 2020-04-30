@@ -16,7 +16,7 @@
 		var hidden = document.getElementById('encryptedValue');
 		// encrypt the value using the password
 		hidden.value = encrypt(password, value);
-		return true;
+		return false;
 	}
 </script>
 </head>
@@ -24,11 +24,11 @@
 	<h3>Private Note</h3>
 	<form action="create" method="post"
 		onsubmit="return prepareForSubmit()">
-		<textarea style="width: 90%; height: 50%" id="value"></textarea><br/> 
-		<input type="hidden" name="encryptedValue"></input><br /> 
+		<textarea style="width: 90%; height: 75%" id="value"></textarea><br/> 
+		<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br /> 
 		<input
-			type="hidden" name="id"></input><br /> 
-			<input style="margin-top: 1em"
+			type="hidden" id="id" name="id"></input><br /> 
+			<input 
 			type="submit" value="Encrypt"></input><br />
 	</form>
 </body>

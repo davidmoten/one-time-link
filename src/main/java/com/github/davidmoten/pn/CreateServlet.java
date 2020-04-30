@@ -16,7 +16,11 @@ public class CreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        System.out.println("called");
+        String id = req.getParameter("id");
+        String value = req.getParameter("encryptedValue");
+        System.out.println("called with id="+ id);
+        System.out.println("value=\n"+ value);
+        System.out.println(req.getParameterMap());
     }
     
     
