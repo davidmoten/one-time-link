@@ -4,6 +4,9 @@
 <script type="text/javascript" src="js/private-note.js"></script>
 <script>
 	
+	const ID_LENGTH = 8;
+	const PASSWORD_LENGTH = 8;
+	
 	function f(frm) {
 
 		// The id is the reference for the encrypted value on the server
@@ -11,9 +14,9 @@
 		// The password is in the url given to someone and the decryption
 		// happens in javascript so server never sees unencrypted values
 		var id = document.getElementById('id');
-		id.value = random_string(16);
+		id.value = random_string(ID_LENGTH);
 		// generate password to encrypt with
-		var password = random_string(16);
+		var password = random_string(PASSWORD_LENGTH);
 		var value = document.getElementById('value').value;
 		var hidden = document.getElementById('encryptedValue');
 		// encrypt the value using the password
@@ -29,14 +32,15 @@
 		
 		var result = document.getElementById('result');
 		result.innerHTML = "Sending...";
+		console.log("data="+ JSON.stringify(data));
 		
 		fetch(frm.action, {
 		  method: frm.method,
 		  body: JSON.stringify(data)
 		}).then(function(res) {
 		  if (res.ok) {
-		    console.log(res);
-                    var u = window.location.origin + "/?id=" + id.value;
+		    console.log(JSON.stringify(res));
+            var u = window.location.origin + "/?id=" + password + id.value;
 		    result.innerHTML = "<a href=" + u + ">" + u + "</a>";
 		  } else {
 		    console.log("error", res);
@@ -76,16 +80,19 @@
 	
 	function view() {
 		var d = document.getElementById('decrypted');
-		fetch('get?id=' + getUrlParam('id', ''), {
+		var p = getUrlParam('id', '');
+		var id = p.substring(PASSWORD_LENGTH, PASSWORD_LENGTH + ID_LENGTH);
+		var password = p.substring(0, PASSWORD_LENGTH);
+		fetch('get?id=' + id, {
 			  method: 'GET'
-			}).then(function(res) {
-			  if (res.ok) {
-			    console.log(res);
-	            d.value = res.text;
-			  } else {
-			    console.log("error", res);
-			    d.value = res.text;
-			  }
+			})
+			.then((res) => res.text())
+			.then(function (text) {
+				d.value = decrypt(password, text);
+			})
+			.catch(function (error) {
+				console.log(error);
+				d.value = error;
 			});
 		d.style.display='block';
 	}
@@ -96,9 +103,9 @@
 <body>
 	<h3>Private Note</h3>
 	<div id="encrypt">
-		<form id="formEncrypt" onsubmit="return f(this)" method="POST"
+		<form id="formEncrypt" onsubmit="return f(this)" method="post"
 			action="create">
-			<textarea style="width: 90%; height: 75%" id="value"></textarea>
+			<textarea style="width: 90%; height:75%; max-height:5em" id="value">asdf</textarea>
 			<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br />
 			<input type="hidden" id="id" name="id"></input><br /> 
 			<input

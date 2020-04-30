@@ -12,8 +12,12 @@ function random_string(C) {
 }
 
 function encrypt(key, value) {
-	return JSON.stringify(sjcl.encrypt(key, value));
+	return btoa(sjcl.encrypt(key, value));
 }
+
+function decrypt(password, value) {
+    return sjcl.decrypt(password, atob(value));
+} 
 
 function sha1(str) {
 	  //  discuss at: http://phpjs.org/functions/sha1/

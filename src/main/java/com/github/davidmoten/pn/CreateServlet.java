@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @WebServlet(name = "create", urlPatterns = { "create" })
 public class CreateServlet extends HttpServlet {
 
@@ -16,8 +19,9 @@ public class CreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String id = req.getParameter("id");
-        String value = req.getParameter("encryptedValue");
+        JsonNode tree = new ObjectMapper().readTree(req.getReader());
+        String id = tree.get("id").asText();
+        String value = tree.get("encryptedValue").asText();
         Store.INSTANCE.put(id, value);
     }
 }
