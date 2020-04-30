@@ -74,6 +74,22 @@
 	    console.log("init run");
 	}
 	
+	function view() {
+		var d = document.getElementById('decrypted');
+		fetch('get?id=' + getUrlParam('id', ''), {
+			  method: 'GET'
+			}).then(function(res) {
+			  if (res.ok) {
+			    console.log(res);
+	            d.value = res.text;
+			  } else {
+			    console.log("error", res);
+			    d.value = res.text;
+			  }
+			});
+		d.style.display='block';
+	}
+	
 	window.onload = initialize;
 </script>
 </head>
@@ -92,7 +108,8 @@
 	</div>
 	
 	<div id="decrypt">
-	    <p>Decrypt stuff here</p>
+	    <button onclick="view()">View</button><br/>
+	    <textarea id="decrypted" style="margin-top: 10px;width:90%; height:75%; display:none"></textarea>
 	</div>
 </body>
 </html>
