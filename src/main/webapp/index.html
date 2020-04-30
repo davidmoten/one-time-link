@@ -78,7 +78,7 @@
 	    console.log("init run");
 	}
 	
-	function view() {
+	function view(viewButton) {
 		var d = document.getElementById('decrypted');
 		var p = getUrlParam('id', '');
 		var id = p.substring(PASSWORD_LENGTH, PASSWORD_LENGTH + ID_LENGTH);
@@ -86,12 +86,22 @@
 		fetch('get?id=' + id, {
 			  method: 'GET'
 			})
-			.then((res) => res.text())
-			.then(function (text) {
-				d.value = decrypt(password, text);
+			.then(function (res) {
+				if (res.status == 410) {
+					d.value = "Value not found, it has probably already been read."
+				} else if (res.status != 200) {
+					d.value = "An error occurred: status code="+ res.status + ", reason: " + "?";
+				} else {
+					d.value = "Loading...";
+					res.text().then(function (x) {
+						d.value = decrypt(password, x);	
+						viewButton.style.display='none';
+					}).catch(function (error) {
+						d.value = error;						
+					});
+				}
 			})
 			.catch(function (error) {
-				console.log(error);
 				d.value = error;
 			});
 		d.style.display='block';
@@ -115,8 +125,8 @@
 	</div>
 	
 	<div id="decrypt">
-	    <button onclick="view()">View</button><br/>
-	    <textarea id="decrypted" style="margin-top: 10px;width:90%; height:75%; display:none"></textarea>
+	    <button onclick="view(this)">View</button><br/>
+	    <textarea id="decrypted" style="margin-top: 10px;width:90%; height:60%; max-height:5em; display:none"></textarea>
 	</div>
 </body>
 </html>

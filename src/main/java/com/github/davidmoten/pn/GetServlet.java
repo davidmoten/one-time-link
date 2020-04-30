@@ -1,6 +1,7 @@
 package com.github.davidmoten.pn;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +15,16 @@ public class GetServlet extends HttpServlet {
     private static final long serialVersionUID = -5187556310639564365L;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        resp.setContentType("text/plain");
-        resp.getWriter().write(Store.INSTANCE.get(req.getParameter("id")));
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        String value = Store.INSTANCE.get(id);
+        if (value == null) {
+            resp.setContentType("text/plain");
+            resp.setStatus(HttpURLConnection.HTTP_GONE);
+            resp.getWriter().write("Value not found for key=" + id);
+        } else {
+            resp.getWriter().write(value);
+        }
     }
 
 }
