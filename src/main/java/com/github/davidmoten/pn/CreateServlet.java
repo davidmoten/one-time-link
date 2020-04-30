@@ -18,11 +18,6 @@ public class CreateServlet extends HttpServlet {
             throws ServletException, IOException {
         String id = req.getParameter("id");
         String value = req.getParameter("encryptedValue");
-        System.out.println("called with id="+ id);
-        System.out.println("value=\n"+ value);
-        System.out.println(req.getParameterMap());
+        Store.INSTANCE.put(id, value);
     }
-    
-    
-
 }

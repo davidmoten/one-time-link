@@ -3,7 +3,9 @@
 <script type="text/javascript" src="js/sjcl.js"></script>
 <script type="text/javascript" src="js/private-note.js"></script>
 <script>
-	function prepareForSubmit() {
+	
+	function f(frm) {
+
 		// The id is the reference for the encrypted value on the server
 		// but the server doesn't have the password to decrypt
 		// The password is in the url given to someone and the decryption
@@ -16,20 +18,52 @@
 		var hidden = document.getElementById('encryptedValue');
 		// encrypt the value using the password
 		hidden.value = encrypt(password, value);
-		return false;
+
+		  const data = {};
+
+		  for (let input of frm) {
+		    if (input.name && input.value) {
+		      data[input.name] = input.value
+		    }
+		  }
+
+		  frm.result.value = "Sending...";
+
+		  fetch(frm.action, {
+		    method: frm.method,
+		    body: JSON.stringify(data)
+		  }).then(function(res) {
+		    if (res.ok) {
+		      console.log(res);
+		      frm.result.value = window.location.origin + "/decrypt.html?id=" + id.value;
+		    } else {
+		      console.log("error", res);
+		      frm.result.value = "Error, try again";
+		    }
+		  });
+
+		  console.log("Down here");
+
+		  return false;
+    }
+
+	
+	function bind() {
+	    document.getElementById('formEncrypt').addEventListener("submit", submit);
 	}
+	
+	//window.onLoad = bind;
+	
 </script>
 </head>
 <body>
 	<h3>Private Note</h3>
-	<form action="create" method="post"
-		onsubmit="return prepareForSubmit()">
-		<textarea style="width: 90%; height: 75%" id="value"></textarea><br/> 
-		<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br /> 
-		<input
-			type="hidden" id="id" name="id"></input><br /> 
-			<input 
-			type="submit" value="Encrypt"></input><br />
+	<form id="formEncrypt" onsubmit="return f(this)" method="POST" action="create">
+	    <textarea style="width: 90%; height: 75%" id="value"></textarea>
+		<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br />
+		<input type="hidden" id="id" name="id"></input><br /> 
+	    <input style = "width:90%" type="text" id="result"></input><br/>
+	    <input type="submit" value="Encrypt"></input>
 	</form>
 </body>
 </html>
