@@ -30,7 +30,18 @@ public final class StoreFileSystem implements Store {
     }
 
     private File file(String key) {
+        validateKey(key);
         return new File(directory, "private-note-" + key + ".encrypted");
+    }
+
+    private void validateKey(String key) {
+        // validation step important to avoid injection of path modifiers like .. or /
+        // into the key
+        for (char ch : key.toCharArray()) {
+            if (!(ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z')) {
+                throw new RuntimeException("key can only contain lower or uppercase A-Z characters");
+            }
+        }
     }
 
     @Override
