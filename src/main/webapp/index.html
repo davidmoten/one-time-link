@@ -1,5 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<title>One Time Link</title>
 <script type="text/javascript" src="js/sjcl.js"></script>
 <script type="text/javascript" src="js/private-note.js"></script>
 <script>
@@ -17,10 +18,10 @@
 		id.value = random_string(ID_LENGTH);
 		// generate password to encrypt with
 		var password = random_string(PASSWORD_LENGTH);
-		var value = document.getElementById('value').value;
+		var unencrypted = document.getElementById('value');
 		var hidden = document.getElementById('encryptedValue');
 		// encrypt the value using the password
-		hidden.value = encrypt(password, value);
+		hidden.value = encrypt(password, unencrypted.value);
 
 		const data = {};
 		
@@ -42,6 +43,7 @@
 		    console.log(JSON.stringify(res));
             var u = window.location.origin + "/?id=" + password + id.value;
 		    result.innerHTML = "<a href=" + u + ">" + u + "</a>";
+		    unencrypted.value = '';
 		  } else {
 		    console.log("error", res);
 		    result.innerHTML = "Error, try again";
@@ -111,11 +113,11 @@
 </script>
 </head>
 <body>
-	<h3>Private Note</h3>
+	<h3>One Time Link</h3>
 	<div id="encrypt">
 		<form id="formEncrypt" onsubmit="return f(this)" method="post"
 			action="create">
-			<textarea style="width: 90%; height:75%; max-height:5em" id="value">asdf</textarea>
+			<textarea style="width: 90%; height:75%; max-height:5em" id="value"></textarea>
 			<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br />
 			<input type="hidden" id="id" name="id"></input><br /> 
 			<input

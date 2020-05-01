@@ -17,7 +17,7 @@ public class GetServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        String value = Store.INSTANCE.get(id);
+        String value = Stores.instance().get(id);
         if (value == null) {
             resp.setContentType("text/plain");
             resp.setStatus(HttpURLConnection.HTTP_GONE);
