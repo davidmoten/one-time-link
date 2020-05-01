@@ -1,10 +1,32 @@
-# private-note
-A private message encrypter that works like https://privnote.com but you own the source and the data in your own AWS account.
+# one-time-link
+A private message encrypter written in Java that works like https://privnote.com.
 
-Features
-* Deployed to *your* AWS account with CloudFormation script
+Two implementations are explored:
+* self-contained war the saves encrypted messages to the file system
+* TODO - scalable low cost AWS implementation
 
-## Design
+## Self-contained WAR
+
+### How to run locally
+```
+mvn jetty:run
+```
+Then go to [http://localhost:8080](http://localhost:8080).
+
+### How to deploy to a java servlet container
+To build:
+
+```
+mvn clean install
+```
+Then deploy `target/one-time-link*.war` to your servlet container (Tomcat, Jetty, etc).
+
+Encrypted values are stored on the server file system in the `java.io.tmpdir` directory (`/tmp` on Linux).
+
+## AWS implementation
+This is not implemented yet. Here is a discussion of how it could be done.
+
+### Design
 On submission:
 * a /*secretId* is generated (16 chars using private-note.js:random_string())
 * value is encrypted using *secretId* AES 256 with library sjcl.js
@@ -40,7 +62,7 @@ Notes:
 TODO
 * allow user to specify TTL (Time to Live) for individual messages
 
-### Resources
+#### AWS Resources
 * One Lambda to support `store` and `get` methods of the API 
 * One S3 bucket to store encrypted values with object read and write access from the API lambda
 * One S3 bucket with static html/js resources
