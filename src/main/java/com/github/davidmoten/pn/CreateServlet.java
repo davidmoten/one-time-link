@@ -20,6 +20,6 @@ public class CreateServlet extends HttpServlet {
         JsonNode tree = new ObjectMapper().readTree(req.getReader());
         String id = tree.get("id").asText();
         String value = tree.get("encryptedValue").asText();
-        Stores.instance().put(id, value);
+        Stores.instance().put(id, value, Long.MAX_VALUE);
     }
 }

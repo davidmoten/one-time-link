@@ -96,7 +96,7 @@
 			})
 			.then(function (res) {
 				if (res.status == 410) {
-					d.value = "Value not found, it has probably already been read."
+					d.value = "Value not found, it has already been read or has expired."
 				} else if (res.status != 200) {
 					d.value = "An error occurred: status code="+ res.status + ", reason: " + "?";
 				} else {

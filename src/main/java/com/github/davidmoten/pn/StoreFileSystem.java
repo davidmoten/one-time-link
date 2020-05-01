@@ -18,20 +18,33 @@ public final class StoreFileSystem implements Store {
     }
 
     @Override
-    public void put(String key, String value) {
+    public void put(String key, String value, long expiryTime) {
         Preconditions.checkNotNull(key);
         Preconditions.checkNotNull(value);
         directory.mkdirs();
-        try (FileOutputStream fos = new FileOutputStream(file(key))) {
+        validateKey(key);
+        File valueFile = valueFile(key);
+        if (valueFile.exists()) {
+            throw new RuntimeException("key already exists: " + key);
+        }
+        try (FileOutputStream fos = new FileOutputStream(valueFile)) {
             fos.write(value.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        try (FileOutputStream fos = new FileOutputStream(expiryFile(key))) {
+            fos.write(Long.toString(expiryTime).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
     }
 
-    private File file(String key) {
-        validateKey(key);
-        return new File(directory, "private-note-" + key + ".encrypted");
+    private File valueFile(String key) {
+        return new File(directory, "one-time-link-" + key + ".encrypted");
+    }
+
+    private File expiryFile(String key) {
+        return new File(directory, "one-time-link-" + key + ".expiry");
     }
 
     private void validateKey(String key) {
@@ -46,21 +59,35 @@ public final class StoreFileSystem implements Store {
 
     @Override
     public String get(String key) {
-        File file = file(key);
-        if (file.exists()) {
-            try {
+        File expiryFile = expiryFile(key);
+        File file = valueFile(key);
+
+        try {
+            if (!expiryFile.exists()) {
+                file.delete();
+                return null;
+            } else {
+                byte[] bytes = Files.readAllBytes(expiryFile.toPath());
+                long expiryTime = Long.parseLong(new String(bytes, StandardCharsets.UTF_8));
+                if (expiryTime < System.currentTimeMillis()) {
+                    expiryFile.delete();
+                    file.delete();
+                    return null;
+                }
+            }
+            if (file.exists()) {
                 byte[] bytes = Files.readAllBytes(file.toPath());
                 if (!file.delete()) {
                     throw new IOException("could not delete file " + file);
                 } else {
                     return new String(bytes, StandardCharsets.UTF_8);
                 }
-            } catch (IOException e) {
-                throw new UncheckedIOException(e);
+
+            } else {
+                return null;
             }
-        } else {
-            System.out.println("file does not exist: " + file);
-            return null;
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
         }
     }
 

@@ -9,7 +9,7 @@ final class StoreMemory implements Store {
 
     static final StoreMemory INSTANCE = new StoreMemory();
 
-    public void put(String key, String value) {
+    public void put(String key, String value, long expiryTime) {
         map.put(key, value);
     }
 
