@@ -60,7 +60,7 @@
 		  if (res.ok) {
 		    console.log(JSON.stringify(res));
             var u = document.baseURI + "?id=" + password + id.value;
-		    result.innerHTML = "<a href=" + u + ">" + absolutePath(u) + "</a>";
+		    result.innerHTML = "<a href=" + u + ">" + u + "</a>";
 		    unencrypted.value = '';
 		  } else {
 		    console.log("error", res);
@@ -69,12 +69,6 @@
 		});
 		return false;
     }
-	
-	function absolutePath(href) {
-	    var element = document.createElement("a123");
-	    element.href = href;
-	    return element.href;
-	}
 	
 	function getUrlVars() {
 	    var vars = {};
