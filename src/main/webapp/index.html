@@ -7,6 +7,21 @@
 <script type="text/javascript" src="js/sjcl.js"></script>
 <script type="text/javascript" src="js/private-note.js"></script>
 <script>
+
+    // when a user hits the encrypt button 
+    // * a random id is generated that will be the reference id of the encrypted value on the server
+    // * a random password is generated that will be included in the link url with the id (concatenated)
+    // * the password is used to encrypt the text
+    // * the id, the encrypted value and the expiry time is sent to the server
+    
+    // when a user hits View on the given link
+    // * the id and password are extracted from the parameters of the link
+    // * the encrypted value is retrieved from the server using the id
+    // * the password is used to decrypt the encrypted value
+    // * the decrypted value is displayed
+    
+    // The server never sees the password of the encrypted value that it stores.
+    // The encrypted value is only retrievable once.
 	
 	const ID_LENGTH = 16;
 	const PASSWORD_LENGTH = 16;
