@@ -6,10 +6,13 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.concurrent.TimeUnit;
 
 import com.github.davidmoten.guavamini.Preconditions;
 
 public final class StoreFileSystem implements Store {
+
+    private static final long MAX_DAYS_TO_LIVE = 30;
 
     private final File directory;
 
@@ -33,7 +36,8 @@ public final class StoreFileSystem implements Store {
             throw new UncheckedIOException(e);
         }
         try (FileOutputStream fos = new FileOutputStream(expiryFile(key))) {
-            fos.write(Long.toString(expiryTime).getBytes(StandardCharsets.UTF_8));
+            long t = Math.min(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(MAX_DAYS_TO_LIVE), expiryTime);
+            fos.write(Long.toString(t).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
