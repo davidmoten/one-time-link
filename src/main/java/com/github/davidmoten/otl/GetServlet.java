@@ -1,4 +1,4 @@
-package com.github.davidmoten.pn;
+package com.github.davidmoten.otl;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

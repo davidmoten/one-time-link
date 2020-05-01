@@ -6,12 +6,12 @@
     <!--  provide the injector to all web pages etc -->
     <servlet>
          <servlet-name>Create</servlet-name>
-         <servlet-class>com.github.davidmoten.pn.CreateServlet</servlet-class>
+         <servlet-class>com.github.davidmoten.otl.CreateServlet</servlet-class>
     </servlet>
     
     <servlet>
          <servlet-name>Get</servlet-name>
-         <servlet-class>com.github.davidmoten.pn.GetServlet</servlet-class>
+         <servlet-class>com.github.davidmoten.otl.GetServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
