@@ -138,8 +138,17 @@
 			<textarea style="width: 90%; height:75%; max-height:5em" id="value"></textarea>
 			<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br />
 			<input type="hidden" id="id" name="id"></input><br /> 
+			<label label-for="expiryDuration">Expiry:</label>
+			<input type="textbox" id="expiryDuration" name="expiryDuration" value="30"
+			style="width:5em"></input>
+			<select id="expiryUnit">
+				<option value="1000">seconds</option>
+				<option value="60000">minutes</option>
+				<option value="360000">hours</option>
+				<option value="86400000" selected>days</option>
+			</select> <br/>
 			<input
-				type="submit" value="Encrypt"></input>
+				type="submit" value="Encrypt" style="margin-top:10px"></input>
 		</form>
 		<p id="result"></p>
 	</div>
