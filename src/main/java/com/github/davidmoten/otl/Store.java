@@ -6,4 +6,6 @@ public interface Store {
     
     String get(String key);
     
+    void cleanup();
+    
 }

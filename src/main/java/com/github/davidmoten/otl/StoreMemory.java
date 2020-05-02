@@ -16,4 +16,9 @@ final class StoreMemory implements Store {
     public synchronized String get(String key) {
         return map.remove(key);
     }
+
+    @Override
+    public void cleanup() {
+        // TODO
+    }
 }
