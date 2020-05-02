@@ -5,6 +5,10 @@ import java.io.File;
 public final class Stores {
 
     private static Store instance;
+    
+    private Stores() {
+        // prevent instantiation
+    }
 
     synchronized static Store instance() {
         if (instance == null) {

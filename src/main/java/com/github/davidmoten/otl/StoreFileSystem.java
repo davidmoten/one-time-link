@@ -11,17 +11,16 @@ import java.util.concurrent.TimeUnit;
 
 import com.github.davidmoten.guavamini.Preconditions;
 
-public final class StoreFileSystem implements Store {
+final class StoreFileSystem implements Store {
 
     private static final String FILE_PREFIX = "one-time-link-";
     private static final String FILE_SUFFIX_ENCRYPTED = ".encrypted";
     private static final String FILE_SUFFIX_EXPIRY = ".expiry";
-
     private static final long MAX_DAYS_TO_LIVE = 30;
 
     private final File directory;
 
-    public StoreFileSystem(File directory) {
+    StoreFileSystem(File directory) {
         this.directory = directory;
     }
 

@@ -18,7 +18,7 @@ public final class ApplicationServletContextListener implements ServletContextLi
                 () -> Stores.instance().cleanup(), //
                 1, //
                 1, //
-                TimeUnit.MINUTES);
+                TimeUnit.HOURS);
     }
 
     @Override

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CreateServlet extends HttpServlet {
+public final class CreateServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1313656605680750802L;
 
