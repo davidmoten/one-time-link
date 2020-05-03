@@ -132,6 +132,11 @@
 			});
 		d.style.display='block';
 	}
+
+    function copy() {
+        var d = document.getElementById('decrypted');
+        copyToClipboard(d.value);
+    }
 	
 	window.onload = initialize;
 </script>
@@ -157,12 +162,13 @@
 			<input
 				type="submit" value="Encrypt" style="margin-top:10px"></input>
 		</form>
-		<p id="result"></p>
+        <img src="copy.png" onclick="copy()" width="24" height="24"><p id="result"></p>
+        
 	</div>
 	
 	<div id="decrypt">
 	    <div id="viewButtonDiv"><button onclick="view(this)">View</button><br/></div>
-	    <textarea id="decrypted" style="margin-top: 10px;width:90%; height:60%; max-height:5em; display:none"></textarea>
+	    <textarea id="decrypted" style="margin-top: 10px;width:90%; height:60%; max-height:5em; display:none"></textarea><br/>
 	</div>
 </body>
 </html>
