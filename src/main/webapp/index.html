@@ -33,12 +33,11 @@
 		// The password is in the url given to someone and the decryption
 		// happens in javascript so server never sees unencrypted values
 		var id = document.getElementById('id');
-//		var expiryDuration = document.getElementById('expiryDuration');
-//		var expiryDurationUnit = document.getElementById('expiryDurationUnit');
-//		var expiryDurationMs = document.getElementById('expiryDurationMs');
-		
-//		expiryDurationMs.value = expiryDuration.value * expiryDurationUnit.value;
-		
+		var expiryDuration = document.getElementById('expiryDuration');
+		var expiryDurationUnit = document.getElementById('expiryDurationUnit');
+		var expiryDurationMs = document.getElementById('expiryDurationMs');
+		var ms = parseInt(expiryDuration.value) * parseInt(expiryDurationUnit.value);
+		expiryDurationMs.value = "" + ms;
 		id.value = random_string(ID_LENGTH);
 		// generate password to encrypt with
 		var password = random_string(PASSWORD_LENGTH);
@@ -145,17 +144,15 @@
 			<textarea style="width: 90%; height:75%; max-height:5em" id="value"></textarea>
 			<input type="hidden" id="encryptedValue" name="encryptedValue"></input><br />
 			<input type="hidden" id="id" name="id"></input><br /> 
-			<!-- 
 			<label label-for="expiryDuration">Expiry:</label>
 			<input type="textbox" id="expiryDuration" name="expiryDuration" value="30"
 			style="width:5em"></input>
-			<select id="expiryUnit">
+			<select id="expiryDurationUnit">
 				<option value="1000">seconds</option>
 				<option value="60000">minutes</option>
 				<option value="360000">hours</option>
 				<option value="86400000" selected>days</option>
 			</select> <br/>
-			-->
 			<input type="hidden" id="expiryDurationMs" name="expiryDurationMs" value="86400000"></input>
 			<input
 				type="submit" value="Encrypt" style="margin-top:10px"></input>
