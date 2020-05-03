@@ -20,6 +20,7 @@ public final class CreateServlet extends HttpServlet {
         JsonNode tree = new ObjectMapper().readTree(req.getReader());
         String id = tree.get("id").asText();
         String value = tree.get("encryptedValue").asText();
-        Stores.instance().put(id, value, Long.MAX_VALUE);
+        long expiryDurationMs =Long.parseLong(tree.get("expiryDurationMs").asText());
+        Stores.instance().put(id, value, System.currentTimeMillis() + expiryDurationMs);
     }
 }
