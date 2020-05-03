@@ -1,6 +1,10 @@
 # one-time-link
-A private message encrypter written in Java that works like https://privnote.com.
+A private message encrypter written in Java that works like https://privnote.com and can be deployed as a self-contained war to a servlet container.
 
+<img src="src/docs/one-time-link.gif"/>
+
+**Features**
+* encrypted  
 Two implementations are explored:
 * self-contained war the saves encrypted messages to the file system
 * TODO - scalable low cost AWS implementation
