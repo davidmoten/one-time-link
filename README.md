@@ -32,7 +32,7 @@ mvn clean install
 ```
 Then deploy `target/one-time-link*.war` to your servlet container (Tomcat, Jetty, etc).
 
-Encrypted values are stored on the server file system in the `java.io.tmpdir` directory (`/tmp` on Linux).
+Encrypted values are stored on the server file system in the `${java.io.tmpdiri}/one-time-link` directory (`/tmp/one-time-link` on Linux).
 
 ## Security considerations
 Of course this application is ALL about security!
