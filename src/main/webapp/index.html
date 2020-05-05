@@ -56,7 +56,7 @@
 		
 		var result = document.getElementById('result');
 		result.innerHTML = "Sending...";
-		console.log("data="+ JSON.stringify(data));
+		var resultDiv = document.getElementById('resultDiv');
 		
 		fetch(frm.action, {
 		  method: frm.method,
@@ -71,6 +71,7 @@
 		    console.log("error", res);
 		    result.innerHTML = "Error, try again";
 		  }
+		  resultDiv.style.display='block';
 		});
 		return false;
     }
@@ -162,7 +163,9 @@
 			<input
 				type="submit" value="Encrypt" style="margin-top:10px"></input>
 		</form>
-        <img src="copy.png" onclick="copy()" width="24" height="24" style="float:left; margin-right:10px"><p id="result"></p>
+		<div id="resultDiv" style="display:none">
+            <img src="copy.png" onclick="copy()" width="24" height="24" style="float:left; margin-right:10px"><p id="result"></p>
+        </div>
         
 	</div>
 	
