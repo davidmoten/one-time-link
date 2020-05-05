@@ -8,9 +8,7 @@ A Java webapp that encrypts a secret in the browser and stores encrypted informa
 Status: *Deployed to Maven Central*
 
 ## Demo
-
 <img src="src/docs/one-time-link.gif"/>
-
 ## How to run locally
 ```
 mvn jetty:run
