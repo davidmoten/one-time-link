@@ -9,7 +9,7 @@
     </parent>
     <artifactId>one-time-link</artifactId>
     <packaging>war</packaging>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>Webapp for sending single use links to encrypted information</description>
 
@@ -58,7 +58,7 @@
         <connection>scm:git:https://github.com/davidmoten/one-time-link.git</connection>
         <developerConnection>scm:git:https://github.com/davidmoten/one-time-link.git</developerConnection>
         <url>scm:git:https://github.com:davidmoten/one-time-link.git</url>
-        <tag>0.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
