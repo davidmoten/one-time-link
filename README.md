@@ -1,4 +1,8 @@
 # one-time-link
+[![Travis CI](https://travis-ci.org/davidmoten/one-time-link.svg)](https://travis-ci.org/davidmoten/one-time-link)<br/>
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.davidmoten/one-time-link/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.github.davidmoten/one-time-link)<br/>
+
+
 A Java webapp that encrypts a secret in the browser and stores encrypted information on the server (without the secret) that can only be read once by the link. That link is the link you would pass to an associate preferrably via some secure protocol (like WhatsApp). The advantage of passing a one-time link is that even if someone gets access to the history of your messages they won't get access to the secret.
 
 **Features**
