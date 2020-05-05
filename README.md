@@ -1,13 +1,16 @@
 # one-time-link
 A Java webapp that encrypts a secret in the browser and stores encrypted information on the server (without the secret) that can only be read once by the link. That link is the link you would pass to an associate preferrably via some secure protocol (like WhatsApp). The advantage of passing a one-time link is that even if someone gets access to the history of your messages they won't get access to the secret.
 
-Status: *Deployed to Maven Central*
-
-<img src="src/docs/one-time-link.gif"/>
-
 **Features**
 * uses AES 256 bit CCM encryption
 * self-contained war that saves encrypted messages to the file system
+
+Status: *Deployed to Maven Central*
+
+## Demo
+
+<img src="src/docs/one-time-link.gif"/>
+
 
 ## How to run locally
 ```
