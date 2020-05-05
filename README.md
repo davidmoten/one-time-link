@@ -33,6 +33,7 @@ Important things to note:
 * AES 256 is considered strong enough for top secret encryption by the NSA
 * The server side never sees the unencrypted value nor the secret key used for the encryption
 * Sending a one-time use link by email is problematic because a man-in-the-middle attack might intercept an email, use the link, and create a new link from the secret to pass on to the recipient in the edited email. Ideally your communication channel will be secure enough that man-in-the-middle attacks are not possible.
+* The message key and the password are 16 characters long generated from random lower case and upper case letters (2.8 x 10<sup>27</sup> variations). 
 
 ## AWS
 Discussion of a scalable AWS implementation is [here](src/docs/AWS.md).
