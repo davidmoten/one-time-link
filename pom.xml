@@ -15,7 +15,7 @@
     <name>${project.artifactId}</name>
     <description>Webapp for sending single use links to encrypted information</description>
 
-    <url>http://github.com/davidmoten/private-note</url>
+    <url>http://github.com/davidmoten/one-time-link</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,12 +34,12 @@
 
     <ciManagement>
         <system>Travis</system>
-        <url>https://travis-ci.org/davidmoten/private-note</url>
+        <url>https://travis-ci.org/davidmoten/one-time-link</url>
     </ciManagement>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/davidmoten/private-note/issues</url>
+        <url>https://github.com/davidmoten/one-time-link/issues</url>
     </issueManagement>
 
     <inceptionYear>2020</inceptionYear>
@@ -57,9 +57,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/davidmoten/private-note.git</connection>
-        <developerConnection>scm:git:https://github.com/davidmoten/private-note.git</developerConnection>
-        <url>scm:git:https://github.com:davidmoten/private-note.git</url>
+        <connection>scm:git:https://github.com/davidmoten/one-time-link.git</connection>
+        <developerConnection>scm:git:https://github.com/davidmoten/one-time-link.git</developerConnection>
+        <url>scm:git:https://github.com:davidmoten/one-time-link.git</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13</version>
             <scope>test</scope>
         </dependency>
 
