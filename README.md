@@ -20,7 +20,12 @@ mvn jetty:run
 Then go to [http://localhost:8080](http://localhost:8080).
 
 ## How to deploy to a java servlet container
-To build:
+Either
+* download the binary from [Maven Central](https://repo1.maven.org/maven2/com/github/davidmoten/one-time-link/)
+or
+* build from source 
+
+To build from source:
 
 ```
 mvn clean install
