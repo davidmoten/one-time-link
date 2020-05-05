@@ -13,7 +13,8 @@ function random_string(C) {
 }
 
 function encrypt(key, value) {
-	return btoa(sjcl.encrypt(key, value));
+	// use AES 256 bit CCM encryption
+	return btoa(sjcl.encrypt(key, value, {count:2048, ks:256}));
 }
 
 function decrypt(password, value) {
