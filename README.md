@@ -21,7 +21,7 @@ Then go to [http://localhost:8080](http://localhost:8080).
 
 ## How to deploy to a java servlet container
 Either
-* download the binary from [Maven Central](https://repo1.maven.org/maven2/com/github/davidmoten/one-time-link/)
+* download the WAR file from [Maven Central](https://repo1.maven.org/maven2/com/github/davidmoten/one-time-link/)
 or
 * build from source 
 
