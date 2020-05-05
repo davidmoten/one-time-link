@@ -11,7 +11,6 @@ Status: *Deployed to Maven Central*
 
 <img src="src/docs/one-time-link.gif"/>
 
-
 ## How to run locally
 ```
 mvn jetty:run
