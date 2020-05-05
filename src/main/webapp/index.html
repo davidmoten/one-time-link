@@ -65,7 +65,7 @@
 		  if (res.ok) {
 		    console.log(JSON.stringify(res));
             var u = document.baseURI + "?id=" + password + id.value;
-		    result.innerHTML = "<a href=" + u + ">" + u + "</a>";
+		    result.innerHTML = '<a href="' + u + '" id="url">' + u + '</a>';
 		    unencrypted.value = '';
 		  } else {
 		    console.log("error", res);
@@ -134,8 +134,8 @@
 	}
 
     function copy() {
-        var d = document.getElementById('decrypted');
-        copyToClipboard(d.value);
+        var d = document.getElementById('url');
+        copyToClipboard(d.href);
     }
 	
 	window.onload = initialize;
@@ -162,7 +162,7 @@
 			<input
 				type="submit" value="Encrypt" style="margin-top:10px"></input>
 		</form>
-        <img src="copy.png" onclick="copy()" width="24" height="24"><p id="result"></p>
+        <img src="copy.png" onclick="copy()" width="24" height="24" style="float:left; margin-right:10px"><p id="result"></p>
         
 	</div>
 	
