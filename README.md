@@ -8,7 +8,7 @@ A Java webapp that encrypts a secret in the browser and stores encrypted informa
 * uses AES 256 bit CCM encryption ([Stanford Javascript Crypto Library](https://bitwiseshiftleft.github.io/sjcl/))
 * self-contained war that saves encrypted messages to the file system
 
-Status: *Deployed to Maven Central*
+**Status**: *Deployed to Maven Central*
 
 ## Demo
 <img src="src/docs/one-time-link.gif"/>
