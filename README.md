@@ -9,6 +9,7 @@ Status: *Deployed to Maven Central*
 
 ## Demo
 <img src="src/docs/one-time-link.gif"/>
+
 ## How to run locally
 ```
 mvn jetty:run
