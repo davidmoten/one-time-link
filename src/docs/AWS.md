@@ -40,7 +40,8 @@ TODO
 #### AWS Resources
 * One Lambda to support `store` and `get` methods of the API 
 * One S3 bucket to store encrypted values with object read and write access from the API lambda
-* One S3 bucket with static html/js resources
+* One S3 bucket with static html/js resources (public)
+* One S3 bucket to hold lambda jar
 * Dynamic SQS queue creation, read and write access from the API lambda
 * Api Gateway with `store(key, value)` and `get(key)` methods that integrate with API lambda. Key will be secretIdHash and Value will be encryptedValue. SHA-1 hash is 20 bytes = 28 bytes when Base 64 encoded. Max length of Value will be order of 7MB unencoded (due to the 10MB payload limit on API Gateway).
 * Api Gateway method that integrates with S3 static resources bucket
